@@ -4,8 +4,16 @@ const imageToPDF = require("./imageToPdf");
 const convertImageToPDF = async (imageURL, isPDFDoc) => {
   try {
     const imageData = await loadImageDataFromURL(imageURL);
+     
     const pages = [imageData];
-    const method = isPDFDoc ? imageToPDF : imageToPDF.imageToPDFBase64;
+    let method;
+    if (isPDFDoc === undefined || parseInt(isPDFDoc) === 1) {
+      method = imageToPDF;
+    }
+    if (parseInt(isPDFDoc) === 2) {
+      method = imageToPDF.imageToPDFBase64;
+    }
+
     const pdfBuffer = await method(pages, imageToPDF.sizes.A4);
     return pdfBuffer;
   } catch (error) {
@@ -27,5 +35,6 @@ const loadImageDataFromURL = (url) => {
     });
   });
 };
+ 
 
 module.exports = convertImageToPDF;

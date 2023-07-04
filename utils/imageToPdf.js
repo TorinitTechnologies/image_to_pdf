@@ -21,7 +21,7 @@ const imageToPDFBase64 = (pages, size) => {
     let doc = new PDFDocument({ margin: 0, size });
     doc = addImagesOnPDFDoc(pages, doc,size);
     doc.end();
-    resolve(doc);
+     resolve(doc);
   });
 };
 
