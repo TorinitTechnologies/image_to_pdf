@@ -5,8 +5,8 @@ const convertImageToPDF = async (imageURL) => {
   try {
     const imageData = await loadImageDataFromURL(imageURL);
     const pages = [imageData];
-    const pdfData = imageToPDF(pages, imageToPDF.sizes.A4);
-    return pdfData;
+    const pdfBuffer = await imageToPDF(pages, imageToPDF.sizes.A4);
+    return pdfBuffer;
   } catch (error) {
     throw new Error(error);
   }
