@@ -4,20 +4,13 @@ const fs = require("fs");
 
 const app = express();
 
-app.get("/image_to_pdf/:is_pdf_doc?", async (req, res) => {
+app.get("/image_to_pdf/", async (req, res) => {
   try {
-    const { is_pdf_doc } = req.params;
-    const { url } = req.query;
-    const pdfResponse = await convertImageToPDF(url, is_pdf_doc);
+     const { url } = req.query;
+    const pdfResponse = await convertImageToPDF(url);
 
-    if (is_pdf_doc === undefined || parseInt(is_pdf_doc) === 1) {
-      res.contentType("application/pdf");
-      res.send(pdfResponse);
-    }
-
-    if (is_pdf_doc && parseInt(is_pdf_doc) === 2) {
-      res.send("pdfData");
-    }
+    res.contentType("application/pdf");
+    res.send(pdfResponse);
   } catch (error) {
     res.status(500).send(error.message);
   }

@@ -1,20 +1,14 @@
 const https = require("https");
 const imageToPDF = require("./imageToPdf");
 
-const convertImageToPDF = async (imageURL, isPDFDoc) => {
+const convertImageToPDF = async (imageURL) => {
   try {
     const imageData = await loadImageDataFromURL(imageURL);
      
     const pages = [imageData];
-    let method;
-    if (isPDFDoc === undefined || parseInt(isPDFDoc) === 1) {
-      method = imageToPDF;
-    }
-    if (parseInt(isPDFDoc) === 2) {
-      method = imageToPDF.imageToPDFBase64;
-    }
+    
 
-    const pdfBuffer = await method(pages, imageToPDF.sizes.A4);
+    const pdfBuffer = await imageToPDF(pages, imageToPDF.sizes.A4);
     return pdfBuffer;
   } catch (error) {
     throw new Error(error);

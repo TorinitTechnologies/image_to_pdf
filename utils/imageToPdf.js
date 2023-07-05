@@ -15,15 +15,7 @@ const imageToPDF = (pages, size) => {
     doc.end();
   });
 };
-
-const imageToPDFBase64 = (pages, size) => {
-  return new Promise((resolve, reject) => {
-    let doc = new PDFDocument({ margin: 0, size });
-    doc = addImagesOnPDFDoc(pages, doc,size);
-    doc.end();
-     resolve(doc);
-  });
-};
+ 
 
 const addImagesOnPDFDoc = (pages, doc,size) => {
   for (let index = 0; index < pages.length; index++) {
@@ -39,5 +31,4 @@ const addImagesOnPDFDoc = (pages, doc,size) => {
 };
 
 module.exports = imageToPDF;
-module.exports.imageToPDFBase64 = imageToPDFBase64;
 module.exports.sizes = require("./sizes.json");
