@@ -1,9 +1,10 @@
 const express = require("express");
 const convertImageToPDF = require("./utils/imageToPdfConverter");
+
 const fs = require("fs");
-
+const cors =  require("cors")
 const app = express();
-
+app.use(cors())
 app.get("/image_to_pdf/", async (req, res) => {
   try {
      const { url } = req.query;
